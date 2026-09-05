@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Milaan (मिलान) — AI Settlement Reconciliation Controller</title>
+  <title>Milaan (मिलान) — Automated Settlement Reconciliation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/styles.css">
-  <!-- Chart.js for visualization -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -17,7 +16,7 @@
   <header class="navbar">
     <div class="brand">
       <div class="brand-logo">Milaan (मिलान)</div>
-      <div class="brand-badge">Track 4 · AI Finance Controller</div>
+      <div class="brand-tagline">Three-Way Settlement Reconciliation Platform</div>
     </div>
     <div class="nav-actions">
       <div class="audit-badge" id="auditBadge">
@@ -30,7 +29,7 @@
       </button>
       <button class="btn btn-primary" id="btnRunRecon" onclick="triggerReconRun()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Run 3-Way Recon
+        Run Reconciliation
       </button>
     </div>
   </header>
@@ -42,7 +41,7 @@
       <div class="kpi-card">
         <div class="kpi-header">
           <span>Overall Match Rate</span>
-          <span class="kpi-pill pill-green" id="kpiTierCount">4 Tiers Active</span>
+          <span class="kpi-pill pill-green" id="kpiTierCount">Deterministic Tiers</span>
         </div>
         <div class="kpi-value" id="kpiMatchRate">--%</div>
         <div class="kpi-subtext" id="kpiMatchedSubtext">-- / -- records matched</div>
@@ -59,8 +58,8 @@
 
       <div class="kpi-card">
         <div class="kpi-header">
-          <span>Exception Residue (LLM)</span>
-          <span class="kpi-pill pill-amber" id="kpiResiduePill">Bounded</span>
+          <span>Exception Residue</span>
+          <span class="kpi-pill pill-amber" id="kpiResiduePill">Bounded AI</span>
         </div>
         <div class="kpi-value" id="kpiExceptions">--</div>
         <div class="kpi-subtext" id="kpiResidueSubtext">Deterministic rules first, residue to AI</div>
@@ -88,7 +87,7 @@
       </button>
       <button class="tab-btn" onclick="switchTab('approvals')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        Human Approval Queue
+        Approval Queue
       </button>
       <button class="tab-btn" onclick="switchTab('audit')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -96,7 +95,7 @@
       </button>
       <button class="tab-btn" onclick="switchTab('qa')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        AI Controller Q&A
+        Controller Assistant Q&A
       </button>
     </nav>
 
@@ -104,7 +103,7 @@
     <section id="tab-matches" class="content-card">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <h2 style="font-size: 1.15rem; font-weight: 700;">Tiered Reconciliation Results</h2>
+          <h2 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main);">Reconciled Transactions</h2>
           <p style="color: var(--text-dim); font-size: 0.8rem;">Deterministic cascade: T0 Exact IDs → T1 UTR + Amount → T2 Composition → T3 Fuzzy</p>
         </div>
         <div style="display: flex; gap: 0.5rem;">
@@ -137,7 +136,7 @@
     <!-- Tab 2: Exceptions & AI Residue -->
     <section id="tab-exceptions" class="content-card" style="display: none;">
       <div>
-        <h2 style="font-size: 1.15rem; font-weight: 700;">Exception Classification & Grounded Explanations</h2>
+        <h2 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main);">Exceptions & Grounded Explanations</h2>
         <p style="color: var(--text-dim); font-size: 0.8rem;">Every AI explanation is guarded against hallucinated IDs and amounts.</p>
       </div>
 
@@ -165,10 +164,10 @@
     <section id="tab-approvals" class="content-card" style="display: none;">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <div>
-          <h2 style="font-size: 1.15rem; font-weight: 700;">Controller Action Review & Journal Posting</h2>
+          <h2 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main);">Action Review & Journal Posting</h2>
           <p style="color: var(--text-dim); font-size: 0.8rem;">Money never moves without human authorization. Approved actions post formal journal entries.</p>
         </div>
-        <button class="btn btn-success" onclick="bulkApprove()">
+        <button class="btn btn-primary" onclick="bulkApprove()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
           Approve All Pending
         </button>
@@ -197,8 +196,8 @@
     <section id="tab-audit" class="content-card" style="display: none;">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <div>
-          <h2 style="font-size: 1.15rem; font-weight: 700;">Tamper-Evident SHA-256 Audit Chain</h2>
-          <p style="color: var(--text-dim); font-size: 0.8rem;">Every match, LLM prompt, human review, and journal entry forms an immutable hash chain.</p>
+          <h2 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main);">Tamper-Evident SHA-256 Audit Chain</h2>
+          <p style="color: var(--text-dim); font-size: 0.8rem;">Every match, LLM prompt, human review, and journal entry forms an immutable cryptographic hash chain.</p>
         </div>
         <button class="btn btn-secondary" onclick="verifyAuditChain()">
           Verify Hash Integrity
@@ -226,8 +225,8 @@
     <!-- Tab 5: AI Controller Q&A -->
     <section id="tab-qa" class="content-card" style="display: none;">
       <div>
-        <h2 style="font-size: 1.15rem; font-weight: 700;">Financial Controller AI Intelligence</h2>
-        <p style="color: var(--text-dim); font-size: 0.8rem;">Ask questions strictly grounded in verified reconciliation DB records.</p>
+        <h2 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main);">Financial Controller Assistant</h2>
+        <p style="color: var(--text-dim); font-size: 0.8rem;">Ask questions strictly grounded in verified reconciliation records.</p>
       </div>
 
       <div class="chat-pane">
@@ -255,10 +254,10 @@
   <div class="modal-backdrop" id="explanationModal">
     <div class="modal-dialog">
       <div class="modal-header">
-        <h3 id="modalTitle" style="font-size: 1.1rem; font-weight: 700;">Grounded AI Exception Analysis</h3>
+        <h3 id="modalTitle" style="font-size: 1.05rem; font-weight: 700; color: var(--text-main);">Grounded Exception Analysis</h3>
         <button class="close-btn" onclick="closeModal()">&times;</button>
       </div>
-      <div id="modalBody" style="font-size: 0.9rem; line-height: 1.6; display: flex; flex-direction: column; gap: 0.75rem;">
+      <div id="modalBody" style="font-size: 0.88rem; line-height: 1.6; display: flex; flex-direction: column; gap: 0.85rem;">
         <!-- Injected dynamically -->
       </div>
     </div>
