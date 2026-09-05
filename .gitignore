@@ -216,3 +216,17 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- milaan ---
+.venv/
+.env
+data/generated/*
+!data/generated/.gitkeep
+*.db
+*.db-wal
+*.db-shm
+audit/*.jsonl
+.DS_Store
+.mypy_cache/
+.ruff_cache/
+
